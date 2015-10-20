@@ -14,22 +14,22 @@
 			<hr>
 			<table class="table table-striped">
 				<tbody>
-				<!-- completada tarea-->
-				<?php foreach ( $tareas as $tarea ) : ?>
-					<?php if ( $tarea['completada'] == 0 ) : ?>
+				<!-- Si la tarea esta completada pintarla de color rojo -->
+				<?php foreach ( $tareas as $tarea ) :?>
+					<?php if ( $tareas['completada'] == 0 ) :?>
 					<tr class="warning">
-						<th><?=$tarea['tarea']?></th>
+						<th><?=$tareas['tarea']?></th>
 						<th><span class="glyphicon glyphicon-ok"></span></th>
 						<th><span class="glyphicon glyphicon-trash"></span></th>
 					</tr>
-				<?php else :?>
+				<?php elseif ( $tareas['completada'] != 0 ) :?>
 					<tr class="danger">
-						<th><?=$tarea['tarea']?></th>
+						<th><?=$tareas['tarea']?></th>
 						<th><span class="glyphicon glyphicon-ok"></span></th>
 						<th><span class="glyphicon glyphicon-trash"></span></th>
 					</tr>
 				<?php endif ;?>
-				<?php endforeach ; ?>
+				<?php endforeach ;?>
 				</tbody>
 			</table>
 			<form action="" class="form-iline" method="">

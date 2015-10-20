@@ -18,8 +18,8 @@
 	//Cuando no devuelve nada mas devuelve false
 	while ( $row = $result -> fetch() ) {
 		
-		$tareas [] = $row['tarea'];
-		$tareas [] = $row['completada'];
+		$tareas ['tarea'] = $row['tarea'];
+		$tareas ['completada'] = $row['completada'];
 
 	}
 
