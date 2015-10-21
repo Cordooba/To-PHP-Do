@@ -1,8 +1,10 @@
 <?php
 
+	require_once 'datadb.php';
+
 	try {
 
-		$pdo = new PDO ( 'mysql:host=localhost;dbname=todo', 'manolo', 'manolo' ) ;
+		$pdo = new PDO ( 'mysql:host='.$host.';dbname='.$db, $usser, $pass ) ;
 
 		$pdo->setAttribute ( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 

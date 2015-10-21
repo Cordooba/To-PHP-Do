@@ -4,7 +4,7 @@
 
 	try {
 		
-		$sql = 'SELECT tarea, completada FROM tareas';
+		$sql = 'SELECT tarea,nivel,completada completada FROM tareas ORDER BY nivel DESC';
 
 		$result = $pdo->query($sql);
 
@@ -16,10 +16,9 @@
 
 	//La funcion fetch() ejecuta la sentencia SQL SELECT * FROM... 
 	//Cuando no devuelve nada mas devuelve false
-	while ( $row = $result -> fetch() ) {
+	while ( $row = $result -> fetch(PDO::FETCH_ASSOC) ) {
 		
-		$tareas ['tarea'] = $row['tarea'];
-		$tareas ['completada'] = $row['completada'];
+		$tareas [] = $row;
 
 	}
 
