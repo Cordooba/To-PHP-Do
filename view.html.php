@@ -5,17 +5,31 @@
 	<title>Lista de Tareas</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.css">
 	<link rel="stylesheet" href="css/styles.css">
+	<style>
+
+		.deletetask{
+
+		text-align: right;
+
+		}
+
+		button[type=submit] {
+
+		margin: 0px;
+
+		}
+
+	</style>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
 		<div class="col-lg-offset-3 col-lg-6">
+
 		<!-- <pre>
 			<?php var_dump($tareas) ?>
-		</pre> 
+		</pre> -->
 
-		Tareas de las mas prioritarias a las menos prioritarias
-		-->
 			<h1>Mis Tareas</h1>
 			<hr>
 			<table class="table table-striped">
@@ -45,8 +59,13 @@
 					?>
 						<tr <?=$colorTarea?>>
 							<th><?=$tarea['tarea']?></th>
-							<th><span class="glyphicon glyphicon-ok"></span></th>
-							<th><span class="glyphicon glyphicon-trash"></span></th>
+							<!-- <span class="glyphicon glyphicon-trash"></span> -->
+							<th class="deletetask">
+								<form action="?deletetask" method="POST">
+									<input type="hidden" name="idtask" value=<?=$tarea['id']?>>
+									<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-trash"></i></button>
+								</form>
+							</th>
 						</tr>
 					<?php endforeach ;?>
 				<?php else : ?>
@@ -55,7 +74,7 @@
 				<?php endif ; ?>		
 				</tbody>
 			</table>
-			<form class="" method="POST">
+			<form action="?addtask" method="POST">
 					<div class="form-group col-lg-8">
 					    <input type="text" class="form-control col-lg-8" name="tarea" placeholder="Introducir Tarea">
 					</div>
@@ -75,6 +94,20 @@
 						<button type="submit" class="btn btn-info">Guardar</button>					
 					</div>
 			</form>
+			<div class="row">
+			<div class="col-lg-offset-3 col-lg-6">
+				<?php if( isset($errores) ): ?>
+			<div class="panel panel-danger">
+				<div class="panel-heading">Error</div>
+				<div class="panel-body">
+					<?php foreach ( $errores as $error ) : ?>
+						<?=$error?><br>
+					<?php endforeach; ?>
+				</div>
+			</div>
+			<?php endif; ?>
+			</div>
+			</div>
 		</div>
 		</div>
 	</div>
