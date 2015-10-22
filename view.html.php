@@ -12,7 +12,10 @@
 		<div class="col-lg-offset-3 col-lg-6">
 		<!-- <pre>
 			<?php var_dump($tareas) ?>
-		</pre> -->
+		</pre> 
+
+		Tareas de las mas prioritarias a las menos prioritarias
+		-->
 			<h1>Mis Tareas</h1>
 			<hr>
 			<table class="table table-striped">
@@ -52,24 +55,28 @@
 				<?php endif ; ?>		
 				</tbody>
 			</table>
-			<form action="" class="form-iline" method="">
-				<div class="form-group">
-					<input type="text" class="form-control col-log-8" name="tarea" placeholder="Introducir una tarea...">
-				</div>
-				<div clas="form-group col-lg2">
-				 	<select class="form-control" name="nivel">
-				 		<option>Nivel</option>
-						<option value="1">1</option>
-						<option value="2">2</option>
-						<option value="3">3</option>
-						<option value="4">4</option>
-						<option value="5">5</option>
-					</select>
-					<button type="submit" class="btn btn-info">Guardar</button>
-				</div>
+			<form class="" method="POST">
+					<div class="form-group col-lg-8">
+					    <input type="text" class="form-control col-lg-8" name="tarea" placeholder="Introducir Tarea">
+					</div>
+					<!-- Por defecto si no selecionamos ningun nivel al guardar una tarea 
+					tenemos el primer nivel solamente !!! MOD -->
+					<div class="form-group col-lg-4">
+					    <select class="form-control" name="nivel">
+					      <option>Nivel</option>
+						  <option value="1">1</option>
+						  <option value="2">2</option>
+						  <option value="3">3</option>
+						  <option value="4">4</option>
+						  <option value="5">5</option>
+						</select>
+					</div>
+					<div class="form-group col-lg-4">
+						<button type="submit" class="btn btn-info">Guardar</button>					
+					</div>
 			</form>
-	</div>
-	</div>
+		</div>
+		</div>
 	</div>
 </body>
 </html>
