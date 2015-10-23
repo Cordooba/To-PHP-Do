@@ -33,6 +33,28 @@
 			<h1>Mis Tareas</h1>
 			<hr>
 			<table class="table table-striped">
+				<thead>
+					<div class="form-group col-lg-3">
+						<form action="?asc" method="POST">
+							<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-sort-by-alphabet"></i></button>
+						</form>
+					</div>
+					<div class="form-group col-lg-3">	
+						<form action="?desc" method="POST">
+							<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-sort-by-alphabet-alt"></i></button>
+						</form>
+					</div>
+					<div class="form-group col-lg-3">	
+						<form action="?maxmin" method="POST">
+							<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-sort-by-order-alt"></i></button>
+						</form>
+					</div>
+					<div class="form-group col-lg-3">	
+						<form action="?minmax" method="POST">
+							<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-sort-by-order"></i></button>
+						</form>
+					</div>	
+				</thead>
 				<tbody>
 				<?php if ( !empty ( $tareas ) ) :?>
 					<?php foreach ( $tareas as $tarea ) :
@@ -59,7 +81,6 @@
 					?>
 						<tr <?=$colorTarea?>>
 							<th><?=$tarea['tarea']?></th>
-							<!-- <span class="glyphicon glyphicon-trash"></span> -->
 							<th class="deletetask">
 								<form action="?deletetask" method="POST">
 									<input type="hidden" name="idtask" value=<?=$tarea['id']?>>
