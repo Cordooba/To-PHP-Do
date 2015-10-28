@@ -25,11 +25,6 @@
 	<div class="container">
 		<div class="row">
 		<div class="col-lg-offset-3 col-lg-6">
-
-		<!-- <pre>
-			<?php var_dump($tareas) ?>
-		</pre> -->
-
 			<h1>Mis Tareas</h1>
 			<hr>
 			<table class="table table-striped">
@@ -81,6 +76,12 @@
 					?>
 						<tr <?=$colorTarea?>>
 							<th><?=$tarea['tarea']?></th>
+							<th class="completetask">
+								<form action="?completetask" method="POST">
+									<input type="hidden" name="idtask" value=<?=$tarea['id']?>>
+									<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-ok"></i></button>
+								</form>
+							</th>	
 							<th class="deletetask">
 								<form action="?deletetask" method="POST">
 									<input type="hidden" name="idtask" value=<?=$tarea['id']?>>
@@ -129,6 +130,33 @@
 			<?php endif; ?>
 			</div>
 			</div>
+			<?php if ( !empty( $tareasCompletadas ) ) : ?>
+				<h1>Tareas Completadas</h1>
+				<table class="table table-striped">
+					<tbody>
+					<?php foreach ($tareasCompletadas as $tareasComplete) : ?>
+						<tr>
+							<th><?=$tareasComplete['tarea']?></th>
+							<th class="deletetaskComplete">
+								<form action="?deletetaskComplete" method="POST">
+									<input type="hidden" name="idtask" value=<?=$tareasComplete['id']?>>
+									<button type="submit" class="btn btn-link"><i class="glyphicon glyphicon-trash"></i></button>
+								</form>
+							</th>
+						</tr>
+					<?php endforeach ; ?>
+					</tbody>
+				</table>
+			<?php else: ?>
+					<h1>Tareas Completadas</h1>
+					<table class="table table-striped">
+					<tbody>
+						<tr>
+							<th>No existen tareas completadas.</th>
+						</tr>
+					</tbody>
+					</table>	
+			<?php endif; ?>
 		</div>
 		</div>
 	</div>

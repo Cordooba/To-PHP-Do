@@ -1,0 +1,4 @@
+Boton del tick te permite completar una tarea
+Mostar en una tabla y si no hay tareas completadas notificarlos
+Mostrar debajo de la app las 20 ultimas tareas completadas y poder eliminarlas
+Ver todas las tareas completadas

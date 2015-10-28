@@ -100,6 +100,42 @@
 
 	}
 
+	if ( isset( $_GET['completetask'] ) ) {
+		
+		$tareasCompletadas = [];
+
+		$id = $_POST['idtask'];
+
+		try {
+			
+			$sql = "UPDATE tareas SET completada = '1' WHERE id = :id";
+
+			$ps = $pdo -> prepare ($sql);
+
+			$ps->bindValue(':id',$id);
+
+			$ps -> execute();
+
+			$sql = "SELECT id,tarea,nivel FROM tareas WHERE completada = '1';";
+
+			$ps = $pdo -> prepare ($sql);
+
+			$ps -> execute();
+	
+		} catch (PDOException $e) {
+			
+			die( "Error en la consulta de la base de datos: ". $e->getMessage() );
+
+		}
+
+		while ( $row = $ps -> fetch(PDO::FETCH_ASSOC) ) {
+		
+			$tareasCompletadas [] = $row;
+
+		}
+
+	}
+
 	if ( isset( $_GET['addtask'] ) ) {
 
 		$tarea = htmlspecialchars($_POST['tarea'], ENT_QUOTES, 'UTF-8');
@@ -152,6 +188,37 @@
 
 	}
 
+	if ( isset( $_GET['deletetaskComplete'] ) ) {
+
+		$id = $_POST['idtask'];
+
+		if ( is_numeric($id) ) {
+
+			try {
+
+			$sql = "DELETE FROM tareas WHERE id = :id"  ;
+
+			$ps = $pdo->prepare($sql);
+
+			$ps->bindValue(':id',$id);
+
+			$ps->execute();
+
+			//$pdo -> exec($sql);
+
+		} catch (PDOException $e) {
+			
+			die( "Error en la creación de la tabla en la base de datos: ". $e->getMessage() );
+
+		}
+
+		header("Location: .");
+		exit();
+
+		}
+
+	}
+
 	if ( isset( $_GET['deletetask'] ) ) {
 
 		$id = $_POST['idtask'];
@@ -183,11 +250,39 @@
 
 	}
 
+	if (empty($tareasCompletadas) ) {
+
+		try {
+
+		$sql = 'SELECT id,tarea,nivel FROM tareas WHERE completada != "0" ORDER BY nivel DESC, tarea ASC;';
+
+		$ps = $pdo->prepare($sql);
+
+		$ps->execute();
+
+		//$result = $pdo->query($sql);
+
+		} catch (PDOException $e) {
+		
+			die( "Error en la creación de la tabla en la base de datos: ". $e->getMessage() );
+
+		}
+
+	//La funcion fetch() ejecuta la sentencia SQL SELECT * FROM... 
+	//Cuando no devuelve nada mas devuelve false
+	while ( $row = $ps -> fetch(PDO::FETCH_ASSOC) ) {
+		
+		$tareasCompletadas [] = $row;
+
+	}		
+
+	}
+
 	if ( empty($tareas) ) {
 
 		try {
 
-		$sql = 'SELECT id,tarea,nivel FROM tareas ORDER BY nivel DESC, tarea ASC;';
+		$sql = 'SELECT id,tarea,nivel FROM tareas WHERE completada != "1" ORDER BY nivel DESC, tarea ASC;';
 
 		$ps = $pdo->prepare($sql);
 
